@@ -20,14 +20,22 @@ public class User {
     return borrowedBooks;
   }
 
+  private Book getBorrowedBookByTitle(String title) {
+    for (Book book : borrowedBooks) {
+      if (title.equalsIgnoreCase(book.getTitle())) {
+        return book;
+      }
+    }
+    return null;
+  }
+
   public void addBorrowedBook(Book book) {
     borrowedBooks.add(book);
   }
   public void removeBorrowedBook(String title) {
-    for (Book book : borrowedBooks) {
-      if (book.getTitle().equalsIgnoreCase(title)) {
-        borrowedBooks.remove(book);
-      }
+    Book book = getBorrowedBookByTitle(title);
+    if (book != null) {
+      borrowedBooks.remove(book);
     }
   }
 }

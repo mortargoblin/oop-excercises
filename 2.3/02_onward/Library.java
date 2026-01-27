@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class Library {
   private ArrayList<Book> books = new ArrayList<>();
@@ -45,16 +44,24 @@ public class Library {
     return match;
   }
 
+  public Book getBookByTitle(String title) {
+    for (Book book : books) {
+      if (title.equalsIgnoreCase(book.getTitle())) {
+        return book;
+      }
+    }
+    return null;
+  }
+
   // Task 2
   // modified for task 6
   public void borrowBook(String title, String uname) {
     User user = getUserByUname(uname);
-    for (Iterator<Book> iterator = books.iterator(); iterator.hasNext(); ) {
-      Book book = iterator.next();
-      if (title.equalsIgnoreCase(book.getTitle())) {
-        user.addBorrowedBook(book);
-        iterator.remove();
-      }
+    Book book = getBookByTitle(title);
+
+    user.addBorrowedBook(book);
+    if (book != null) {
+      books.remove(book);
     }
   }
 
@@ -103,7 +110,10 @@ public class Library {
     for (User user : users) {
       System.out.printf("User: %s\n", user.getName());
       for (Book book : user.getBorrowedBooks()) {
-        System.out.printf("%s \n", book.getTitle());
+        System.out.printf(
+            "Title: %s, Author: %s, Publication year: %d\n",
+            book.getTitle(), book.getAuthor(), book.getPubYear()
+            );
       }
     }
   }

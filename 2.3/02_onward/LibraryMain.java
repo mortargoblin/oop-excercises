@@ -30,8 +30,13 @@ public class LibraryMain {
 
     // Jaakko borrows books
 
+    System.out.printf("Jaakko borrows some books\n");
     library.borrowBook("I love the C programming language", "Jaakko");
+    library.borrowBook("Some other book", "Jaakko");
 
+    System.out.printf("\nLIBRARY USERS:\n");
     library.displayUsers();
+    System.out.printf("\nLIBRARY BOOKS:\n");
+    library.displayBooks();
   }
 }
