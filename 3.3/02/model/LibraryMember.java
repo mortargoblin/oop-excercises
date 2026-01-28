@@ -23,4 +23,13 @@ public class LibraryMember {
     books.remove(book);
   }
 
+  public Book getBookByTitle(String title) {
+    for (Book book : books) {
+      if (title.equalsIgnoreCase(book.getTitle())) {
+        return book;
+      }
+    }
+    return null;
+  }
+
 }
