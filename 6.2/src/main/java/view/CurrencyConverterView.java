@@ -6,7 +6,6 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
@@ -23,7 +22,6 @@ public class CurrencyConverterView extends Application {
     resultField.setMinWidth(40);
 
     TextField inputField = new TextField();
-    // TextField outputField = new TextField();
     Button modeToggle = new Button("euro to dollar");
     Button convert = new Button("convert");
 
@@ -34,9 +32,7 @@ public class CurrencyConverterView extends Application {
     layout.getChildren().add(modeToggle);
     layout.getChildren().add(convert);
 
-    Scene view = new Scene(layout);
     window.setTitle("Currency converter");
-    window.setScene(view); 
     modeToggle.setOnAction(new EventHandler<ActionEvent>() {
       public void handle(ActionEvent envent) {
         controller.toggleMode();
@@ -47,13 +43,22 @@ public class CurrencyConverterView extends Application {
         }
       }
     });
+
     convert.setOnAction(new EventHandler<ActionEvent>() {
       public void handle(ActionEvent envent) {
-        double result = controller.convert(Double.parseDouble(inputField.getText()));
-        resultField.setText(String.valueOf(result));
+        try {
+          double result = controller.convert(Double.parseDouble(inputField.getText()));
+          resultField.setText(String.valueOf(result));
+        } catch (Exception e) { // :DDD
+          resultField.setText("invalid input");
+        }
       }
     });
 
+    Scene view = new Scene(layout);
+
+    view.getStylesheets().add("style.css");
+    window.setScene(view); 
     window.show();
   }
 }

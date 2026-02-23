@@ -28,7 +28,7 @@ public class DictionaryView extends Application {
     group.getChildren().add(result);
 
     Scene view = new Scene(group);
-    window.setTitle("My Greeting Application");
+    window.setTitle("Dictionary");
     window.setScene(view);
     window.show();
 
