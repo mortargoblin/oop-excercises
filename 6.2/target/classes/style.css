@@ -1,0 +1,9 @@
+.root {
+  -fx-padding: 10px;
+  -fx-spacing: 10px;
+  -fx-font-family: "Arial";
+  -fx-font-size: 15px;
+}
+.button {
+  -fx-padding: 15px;
+}
