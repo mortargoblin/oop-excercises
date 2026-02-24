@@ -14,9 +14,10 @@ import controller.VirtualPetController;
 
 public class VirtualPetView extends Application {
   // gc != garbage collector :DD
+  private final int CANVAS_SIZE = 600;
   private GraphicsContext gc;
   private Canvas canvas;
-  private Image petPic;
+  private Image image;
   private VirtualPetController controller;
   private Pet pet;
 
@@ -25,20 +26,25 @@ public class VirtualPetView extends Application {
     window.setTitle("Virtual pet");
 
     Group root = new Group();
-    canvas = new Canvas(640, 480);
+    canvas = new Canvas(CANVAS_SIZE, CANVAS_SIZE);
 
     gc = canvas.getGraphicsContext2D();
 
     root.getChildren().add(canvas);
-
-    canvas.setOnKeyPressed(event -> {
-    });
+    
+    pet = new Pet(100, 100);
+    controller = new VirtualPetController();
     canvas.setOnMouseMoved(event -> {
       System.out.printf("X: %f, Y: %f\n", event.getX(), event.getY());
+      // controller.setPet(pet, (int) event.getX(), (int) event.getY());
+      controller.movePet(
+          pet, (int)(event.getX() - pet.x), 
+          (int)(event.getY() - pet.y)
+          );
+      updateCanvas();
     });
 
-    pet = new Pet(100, 100);
-    petPic = new Image("majava.png");
+    image = new Image("majava.png");
     updateCanvas();
 
     Scene scene = new Scene(root);
@@ -49,6 +55,8 @@ public class VirtualPetView extends Application {
   }
 
   private void updateCanvas() {
-    gc.drawImage(petPic, pet.getX(), pet.getY());
+    System.out.printf("PET X: %d, Y: %d\n", pet.x, pet.y);
+    gc.clearRect(0,0, CANVAS_SIZE, CANVAS_SIZE);
+    gc.drawImage(image, pet.x, pet.y);
   }
 }
