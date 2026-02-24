@@ -13,8 +13,8 @@ import model.Pet;
 import controller.VirtualPetController;
 
 public class VirtualPetView extends Application {
-  private final int CANVAS_SIZE = 600;
   // gc != garbage collector :DD
+  private final int CANVAS_SIZE = 600;
   private GraphicsContext gc;
   private Canvas canvas;
   private Image image;
@@ -38,8 +38,7 @@ public class VirtualPetView extends Application {
       System.out.printf("X: %f, Y: %f\n", event.getX(), event.getY());
       // controller.setPet(pet, (int) event.getX(), (int) event.getY());
       controller.movePet(
-          pet, 
-          (int)(event.getX() - pet.x), 
+          pet, (int)(event.getX() - pet.x), 
           (int)(event.getY() - pet.y)
           );
       updateCanvas();
